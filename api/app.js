@@ -41,10 +41,7 @@ app.get("/palettes", (req, res) => {
 
 	ColorPalette.find((err, docs) => {
 		if (!err) {
-			console.log(docs)
 			res.json({data: docs})
-		} else {
-			console.log('Could not render collection')
 		}
 	})
 
