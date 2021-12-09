@@ -31,7 +31,9 @@ const colorPaletteSchema = new Schema({
 })
 
 const ColorPalette = mongoose.model("ColorPalette", colorPaletteSchema)
-mongoose.connect("mongodb://localhost:27017/colorPalettes")
+mongoose.connect(
+	"mongodb://colorscape-api.herokuapp.com//colorPalettes"
+)
 
 
 app.use(express.json())

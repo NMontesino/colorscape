@@ -31,7 +31,8 @@ const App = () => {
 	}
 
 	const getAllPalettes = () => {
-		axios.get(`http://localhost:5000/palettes`)
+		axios
+			.get(`https://colorscape-api.herokuapp.com/palettes`)
 			.then((res) => {
 				const allPalettes = res.data.data
 				setPalettes(allPalettes)

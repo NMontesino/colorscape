@@ -158,7 +158,9 @@ const ColorViewer = (props) => {
 	useEffect(async () => {
 		let color
 		if ([3, 4, 6, 8].includes(hex.length)) {
-			color = await axios.get(`http://localhost:5000/hex/${hex}`)
+			color = await axios.get(
+				`https://colorscape-api.herokuapp.com/hex/${hex}`
+			)
 		}
 		if (color) {
 			const { hex, r, g, b } = color.data
@@ -267,7 +269,7 @@ const ColorViewer = (props) => {
 				colors: colorData
 			}
 
-			axios.post(`http://localhost:5000/palettes`, palette)
+			axios.post(`https://colorscape-api.herokuapp.com/palettes`, palette)
 			props.newPalette(palette)
 
 			props.toggle()
