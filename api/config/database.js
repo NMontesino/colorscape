@@ -1,3 +1,3 @@
 module.exports = {
-	database: "mongodb://colorscape-api.herokuapp.com/colorPalettes"
+	database: "mongodb://localhost:27017/colorPalettes"
 }

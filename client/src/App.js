@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import styled from "styled-components"
-import axios from "axios"
+import api from './config'
 import "./App.css"
 
 import ColorViewer from "./components/ColorViewer"
@@ -31,12 +31,10 @@ const App = () => {
 	}
 
 	const getAllPalettes = () => {
-		axios
-			.get(`https://colorscape-api.herokuapp.com/palettes`)
-			.then((res) => {
-				const allPalettes = res.data.data
-				setPalettes(allPalettes)
-			})
+		api.get(`/palettes`).then((res) => {
+			const allPalettes = res.data.data
+			setPalettes(allPalettes)
+		})
 	}
 
 	const addPaletteToList = (palette) => {

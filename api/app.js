@@ -2,21 +2,25 @@ const express = require('express')
 const app = express()
 const mongoose = require("mongoose")
 const config = require("./config/database")
-// const bodyParser = require('body-parser')
 const cors = require('cors')
 const Color = require('./Color')
 const PORT = 5000
 const Schema = mongoose.Schema
 
-const connection = mongoose.connect(config.database, {
+const url = `mongodb+srv://buddhabybirth:NAlexM1296@cluster0.wjcl6.mongodb.net/colorPalettes?retryWrites=true&w=majority`
+
+const connectionParams = {
 	useNewUrlParser: true,
 	useUnifiedTopology: true
-})
-if (connection) {
-	console.log("database connected")
-} else {
-	console.log("database connection error")
 }
+mongoose
+	.connect(url, connectionParams)
+	.then(() => {
+		console.log("Connected to database ")
+	})
+	.catch((err) => {
+		console.error(`Error connecting to the database. \n${err}`)
+	})
 
 const colorPaletteSchema = new Schema({
 	name: String,
@@ -31,9 +35,6 @@ const colorPaletteSchema = new Schema({
 })
 
 const ColorPalette = mongoose.model("ColorPalette", colorPaletteSchema)
-mongoose.connect(
-	"mongodb://colorscape-api.herokuapp.com//colorPalettes"
-)
 
 
 app.use(express.json())
@@ -102,4 +103,4 @@ app.get("/rgba/:r/:g/:b/:a", (req, res) => {
     
 })
 
-app.listen(PORT)
+app.listen(process.env.PORT || PORT)

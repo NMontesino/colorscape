@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
-import axios from "axios"
 import styled from "styled-components"
+import api from "../config"
+
 
 const calcHexCode = (hex, opacity) => {
 	let code = Math.floor(parseInt((opacity / 100) * 255)).toString(16)
@@ -158,8 +159,8 @@ const ColorViewer = (props) => {
 	useEffect(async () => {
 		let color
 		if ([3, 4, 6, 8].includes(hex.length)) {
-			color = await axios.get(
-				`https://colorscape-api.herokuapp.com/hex/${hex}`
+			color = await api.get(
+				`/hex/${hex}`
 			)
 		}
 		if (color) {
@@ -269,7 +270,7 @@ const ColorViewer = (props) => {
 				colors: colorData
 			}
 
-			axios.post(`https://colorscape-api.herokuapp.com/palettes`, palette)
+			api.post(`/palettes`, palette)
 			props.newPalette(palette)
 
 			props.toggle()
